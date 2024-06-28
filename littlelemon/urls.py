@@ -17,9 +17,22 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from restaurant import views
+# default router provides a a root url that displays hyperlinks to all urls that contain list views
+# see: http://localhost:8000/
+router = routers.DefaultRouter()
+# first argument is the url prefix, second argument is the viewset class called for the passed url
+# multiple routes can be registered
+router.register(r'users', views.UserViewSet)
+router.register(r'tables', views.BookingViewSet)
 
 urlpatterns = [
-   path('admin/', admin.site.urls),
-   path('restaurant/', include('restaurant.urls')),
+    path('admin/', admin.site.urls),
+    # path('restaurant/', include('restaurant.urls')),
+    path('restaurant/', include('restaurant.urls')),
+    path('', include(router.urls)),
+    path('restaurant/booking/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
