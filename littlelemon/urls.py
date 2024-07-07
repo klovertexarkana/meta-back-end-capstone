@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from restaurant import views
+from rest_framework.authtoken.views import obtain_auth_token
 # default router provides a a root url that displays hyperlinks to all urls that contain list views
 # see: http://localhost:8000/
 router = routers.DefaultRouter()
@@ -34,5 +35,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('restaurant/booking/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('api-token-auth/', obtain_auth_token),
 ]
 
