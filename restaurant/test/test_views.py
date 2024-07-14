@@ -28,7 +28,7 @@ class MenuViewTest(TestCase):
 
         counter = 1
         for item in response.data:
-            self.assertEqual(item == {'title': Menu.objects.get(id=counter).title, 'price': str(Menu.objects.get(id=counter).price), 
+            self.assertEqual(item == {'id': counter, 'title': Menu.objects.get(id=counter).title, 'price': str(Menu.objects.get(id=counter).price), 
                                  'inventory': Menu.objects.get(id=counter).inventory}, True)
             counter += 1
 
